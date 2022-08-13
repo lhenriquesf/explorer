@@ -1,0 +1,132 @@
+:root {
+    font-size: 62.5%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #EFF1FF;
+    font-family: 'Staatliches', cursive;
+}
+
+.page {
+    max-width: 38.4rem;
+    margin: 0 auto;
+}
+
+.heading {
+    background-color: #8E9AAF;
+    height: 31rem
+}
+
+.image-h {
+    padding: 3.2rem 8rem;
+}
+
+.heading h1 {
+    padding: 0.8rem 5rem;
+
+    text-align: center;
+
+    background-color: #CBC0D3;
+    font-size: 4.0rem;
+    line-height: 3.4rem;
+
+    letter-spacing: 0.05em;
+
+    color: #FFFFFF;
+
+    text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+}
+
+main p {
+    font-family: 'Palanquin', sans-serif;
+    font-size: 1.6rem;
+    line-height: 1.5rem;
+    font-weight: 400;
+
+    text-align: center;
+
+    color: #23053A;
+    padding: 1.4rem 4rem 6rem;
+}
+
+.image-m {
+    position: relative;
+}
+
+.image-m img{
+    max-width: 38.4rem;
+    border-radius: 20px;
+    margin-bottom: 3.2rem;
+
+    animation: downtop 700ms 350ms backwards;
+}
+
+.image-m h2 {
+    border-radius: 2rem;
+    background-color: #FEEAFA;;
+    font-size: 2rem;
+    line-height: 3.4rem;
+    font-weight: 400;
+    color: #4A4E69;
+    padding: 0 1.6rem;
+    letter-spacing: 0.05em;
+
+    width: fit-content;
+    height: 3.8rem;
+
+    display: inline-flex;
+    align-items: center;
+
+    position: absolute;
+    top: 1.6rem;
+    right: 1.6rem;
+
+    animation: topdown 700ms 350ms backwards;
+}
+
+@keyframes topdown {
+    0% {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes downtop {
+    0% {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (min-width: 930px) {
+
+    .page {
+        max-width: 1920px;
+    }
+
+    .heading, main div:nth-child(1){
+        width: 37.5rem;
+        background-color: #8E9AAF;
+    }
+
+    main {
+        display: flex;
+    }
+}
+

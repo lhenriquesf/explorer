@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario - Projeto 03</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=Poppins&display=swap" rel="stylesheet"> 
+</head>
+<body>
+    <div class="page">
+        <header>
+            <h1>Crie e compartilhe seu evento.</h1>
+            <p>O primeiro passo, é preencher esse formulário para inscrição</p>
+        </header>
+    
+        <form id="my-form">
+            <fieldset>
+                <div class="fieldset-wrapper">
+                    <legend>Informações do Evento</legend>
+
+                    <div class="input-wrapper">
+                        <label for="event-title">Titulo do Evento <span>(minimo 8 caracteres)</span></label>
+                        <input type="text" id="event-title" required minlength="8">
+                    </div>
+    
+                    <div class="input-wrapper">
+                        <label for="event-link">Link do Evento <span>(comece com https://)</span></label>
+                        <input type="url" id="event-link">
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label for="event-whatsapp">Whatsapp para contato <span>(somente numeros)</span></label>
+                        <input type="number" id="event-whatsapp">
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label for="event-info">Informacoes extras</label>
+                        <textarea id="event-info"></textarea>
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label for="event-category">Categoria</label>
+                        <select id="event-category">\
+                            <option value="live">Ao vivo</option>
+                            <option value="podcast">Podcast</option>
+                            <option value="mentorship">Mentoria</option>
+                        </select>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <div class="fieldset-wrapper">
+                    <legend>Privacidade</legend>
+
+                    <div class="input-wrapper">
+                        <label for="event-email">e-mail do administrador <span>(digite um email valido)</span></label>
+                        <input type="email" id="event-email">
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label for="event-password">Senha de acesso<span>(minimo 8 caracteres)</span></label>
+                        <input type="password" id="event-password">
+                    </div>
+
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="event-private">
+                        <label for="event-private">Evento privado</label>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <div class="fieldset-wrapper">
+                    <legend>Data e hora</legend>
+
+                    <div class="col-3">
+                        <div class="input-wrapper">
+                            <label for="event-date">Data</label>
+                            <input type="date" id="event-date">
+                        </div>
+    
+                        <div class="input-wrapper">
+                            <label for="event-begin">Das</label>
+                            <input type="time" id="event-begin">
+                        </div>
+
+                        <div class="input-wrapper">
+                            <label for="event-end">Ate</label>
+                            <input type="time" id="event-end">
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            
+        </form>
+        <footer>
+            <button class="button" form="my-form">Salvar evento</button>
+        </footer>
+    </div>
+</body>
+</html>

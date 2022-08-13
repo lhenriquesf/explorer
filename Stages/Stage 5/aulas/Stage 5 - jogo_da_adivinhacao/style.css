@@ -1,0 +1,94 @@
+:root {
+    font-size: 62.5%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #A1C4FD;
+    font-size: 1.6rem;
+
+    display: grid;
+    place-items: center;
+
+    height: 80vh;
+}
+
+body, button, input {
+    font-family: sans-serif;
+}
+
+button {
+    background-color: #7879F1;
+    color: white;
+    font-weight: bold;
+    border-radius: 0 .4rem .4rem 0;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4a4ab6;
+}
+
+.hide {
+    display: none;
+}
+
+main {
+    background: whitesmoke;
+    box-shadow: 0px .2rem .4rem rgba(0, 0, 0, 0.1);
+    border-radius: .6rem;
+    padding: 4.8rem 6.4rem 6.4rem;
+
+    width: min(42.8rem, 90%);
+
+    text-align: center;
+
+}
+
+/* screen 1 */
+h1 {
+    font-size: 2.4rem;
+    margin-bottom: 1.6rem;
+}
+
+h1, p{
+    color: #34355B;
+}
+
+p {
+    opacity: .8;
+}
+
+form {
+    margin-top: 4.8rem;
+    display: flex;
+    justify-content: center;
+}
+
+input, button {
+    border: none;
+    padding: 1.6rem;
+}
+
+input {
+    background-color: #DCE2E9;
+    width: 6.7rem;
+    border-radius: .4rem 0 0 .4rem;
+}
+
+/*screen 2 */
+h2 {
+    font-size: 2.4rem;
+    font-weight: normal;
+
+    margin-bottom: 3.3rem;
+}
+
+.screen2 button{
+    border-radius: .4rem;
+}
