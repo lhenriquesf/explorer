@@ -1,0 +1,164 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    font-size: 62.5%;
+
+    --ff-primary: 'Poppins', sans-serif;
+    --text-color: whitesmoke;
+
+    --hue: 195;
+    --primary-color: hsl(var(--hue), 91%, 25%);
+}
+
+body {
+    font-size: 1.6rem;
+    color: var(--text-color);
+    background-color: rgb(21, 24, 24);
+}
+
+body * {
+    font-family: var(--ff-primary);
+}
+
+.sr-olny {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+#app {
+    padding: 2rem;
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin: 2.5rem 0;
+}
+
+header h1 {
+    font-size: 2rem;
+    /* text-transform: uppercase; */
+}
+
+.search {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.search input, .search button {
+    border-radius: .4rem;
+}
+
+.search input {
+    height: 3.2rem;
+    border: 1px solid rgb(9, 58, 104);
+    padding: 0 .8rem;
+
+    color: var(--text-color);
+    background-color: hsla(191, 65%, 7%, 1);
+}
+
+.search button {
+    color: var(--text-color);
+    background-color: hsla(195, 91%, 25%, 1);
+    height: 3.2rem;
+    border: none;
+    padding: 0 1rem;
+    cursor: pointer;
+}
+
+.search button:hover {
+    filter: brightness(1.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px hsla(191, 31%, 42%, 1) solid;
+    border-bottom: none;
+    
+    box-shadow: 0 1rem 2rem -1rem rgba(0, 0, 0, 0.3);
+
+    border-radius: 100px;
+}
+
+table * {
+    font-size: 1.4rem;
+    color: var(--text-color);
+}
+
+table th {
+    background: hsla(194, 72%, 13%, 1);
+    text-align: left;
+    font-weight: normal;
+    padding: 1.5rem;
+}
+
+/* table th:first-child {
+    border-top-left-radius: .4rem;
+}
+
+table th:last-child {
+    border-top-right-radius: .4rem;
+} */
+
+table tr:nth-child(odd){
+    background: hsla(195, 61%, 6%, 0.5);
+}
+
+table tr:nth-child(even){
+    background: hsla(192, 65%, 7%, 1);
+}
+
+table td {
+    padding: 1.5rem;
+    text-align: left;
+    border-bottom: 1px hsla(191, 31%, 42%, 1) solid;
+}
+
+td.user {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+td.user img{
+    width: 5rem;
+    height: 5rem;
+
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+td.user a {
+    text-decoration: none;
+}
+
+td.user a p {
+    font-weight: bold;
+}
+
+td .remove {
+    background: none;
+    border: none;
+
+    color: red;
+
+    cursor: pointer;
+}
