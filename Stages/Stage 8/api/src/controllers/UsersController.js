@@ -36,7 +36,7 @@ class UsersController {
 
         const userWithUpdatedEmail = await database.get('SELECT * FROM users WHERE email = (?)', [email]);
 
-        if(userWithUpdatedEmail && userWithUpdatedEmail.id !== id){
+        if(userWithUpdatedEmail && userWithUpdatedEmail.id !== user.id){
             throw new AppError('E-mail ja cadastrado!');
         }
 
