@@ -1,8 +1,9 @@
-const { hash } = require('bcryptjs');
+const { hash, compare } = require('bcryptjs');
 const AppError = require('../utils/AppError');
 
 const sqliteConnection = require('../database/sqlite');
-
+const { use } = require('express/lib/router');
+// const { use } = require('express/lib/router');
 class UsersController {
 
     async create(req, res){
@@ -21,9 +22,10 @@ class UsersController {
 
         return res.status(201).json();
     }
+    
 
     async update(req, res){
-        const { name, email } = req.body;
+        const { name, email, password, old_password } = req.body;
         const { id } = req.params;
 
         const database = await sqliteConnection();
@@ -40,10 +42,34 @@ class UsersController {
             throw new AppError('E-mail ja cadastrado!');
         }
 
-        user.name = name;
-        user.email = email;
+        user.name = name ?? user.name;
+        user.email = email ?? user.email;
 
-        await database.run(`UPDATE users SET name = (?), email = (?), updated_at = (?), id = ?`, [user.name, user.email, new Date(), id]);
+        if(password && !old_password){
+            throw new AppError('Precisa informar a senha antiga');
+        }
+
+        if(password && old_password){
+            const checkOldPassword = await compare(old_password, user.password);
+
+            console.log(checkOldPassword);
+
+            if(!checkOldPassword){
+                throw new AppError('A senha antiga nao confere');
+            }
+
+            user.password = await hash(password, 8);
+        }
+
+
+        await database.run(
+            `UPDATE users SET 
+            name = (?), 
+            email = (?),
+            password = (?),
+            updated_at = DATETIME('now', 'localtime'), 
+            id = ?`, 
+            [user.name, user.email, user.password, id]);
 
         return res.json();
     }
