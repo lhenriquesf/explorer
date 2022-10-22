@@ -4,6 +4,7 @@ const knex = require('../database/knex');
 const AppError = require('../utils/AppError');
 
 class NotesController{
+    
     async create(request, response){
         const {title, description, tags, links} = request.body;
         const {user_id} = request.params;
@@ -45,6 +46,8 @@ class NotesController{
         const note = await knex('notes').where({id}).first();
         const tags = await knex('tags').where({note_id: id}).orderBy('name');
         const links = await knex('links').where({note_id: id}).orderBy('created_at');
+
+        console.log(note)
 
         return response.json({
             ...note,

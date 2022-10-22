@@ -11,6 +11,7 @@ class UsersController {
 
         const database = await sqliteConnection();
         const checkUserExists = await database.get('SELECT * FROM users WHERE email = (?)', [email]);
+        console.log(checkUserExists);
 
         if(checkUserExists){
             throw new AppError('E-mail ja cadastrado');
@@ -38,6 +39,7 @@ class UsersController {
 
         const userWithUpdatedEmail = await database.get('SELECT * FROM users WHERE email = (?)', [email]);
 
+        console.log(userWithUpdatedEmail)
         if(userWithUpdatedEmail && userWithUpdatedEmail.id !== user.id){
             throw new AppError('E-mail ja cadastrado!');
         }
