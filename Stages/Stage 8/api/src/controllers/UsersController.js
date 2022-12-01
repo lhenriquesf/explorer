@@ -1,79 +1,74 @@
-const { hash, compare } = require('bcryptjs');
-const AppError = require('../utils/AppError');
+const {hash, compare} = require("bcryptjs");
+const AppError = require("../utils/AppError");
+const sqlConnection = require("../database/sqlite");
 
-const sqliteConnection = require('../database/sqlite');
-const { use } = require('express/lib/router');
-// const { use } = require('express/lib/router');
 class UsersController {
+    
+    async create(request, response){
+        const {name, email, password} = request.body;
 
-    async create(req, res){
-        const {name, email, password} = req.body;
+        const database = await sqlConnection();
+        const checkuserExists = await database.get("SELECT * FROM users WHERE email = (?)", [email]);
 
-        const database = await sqliteConnection();
-        const checkUserExists = await database.get('SELECT * FROM users WHERE email = (?)', [email]);
-        console.log(checkUserExists);
-
-        if(checkUserExists){
-            throw new AppError('E-mail ja cadastrado');
+        if(checkuserExists){
+            throw new AppError("Email already exists");
         }
 
         const hashedPassword = await hash(password, 8);
 
-        await database.run('INSERT INTO users (name, email, password) VALUES (?, ?, ?)', [name, email, hashedPassword]);
+        await database.run(
+            "INSERT INTO users (name, email, password) VALUES (?, ?, ?)", [name, email, hashedPassword]
+        );
 
-        return res.status(201).json();
+        return response.status(201).json();
     }
-    
 
-    async update(req, res){
-        const { name, email, password, old_password } = req.body;
-        const { id } = req.params;
 
-        const database = await sqliteConnection();
+    async update(request, response){
+        const {name , email, password, old_password} = request.body;
+        const {id} = request.params;
 
-        const user = await database.get('SELECT * FROM users WHERE id = (?)', [id]);
+        const database = await sqlConnection();
+        const user = await database.get("SELECT * FROM users WHERE id = (?)", [id]);
 
         if(!user){
-            throw new AppError('Usuario nao encontrado!');
+            throw new AppError("User not found");
         }
 
-        const userWithUpdatedEmail = await database.get('SELECT * FROM users WHERE email = (?)', [email]);
+        const userWithUpdatedEmail = await database.get("SELECT * FROM users WHERE email = (?)", [email]);
 
-        console.log(userWithUpdatedEmail)
         if(userWithUpdatedEmail && userWithUpdatedEmail.id !== user.id){
-            throw new AppError('E-mail ja cadastrado!');
+            throw new AppError("Email is already in use");
         }
 
         user.name = name ?? user.name;
         user.email = email ?? user.email;
 
-        if(password && !old_password){
-            throw new AppError('Precisa informar a senha antiga');
+        if(password && !old_password) {
+            throw new AppError("You need to inform the old password to set the new password");
         }
 
         if(password && old_password){
             const checkOldPassword = await compare(old_password, user.password);
 
-            console.log(checkOldPassword);
-
             if(!checkOldPassword){
-                throw new AppError('A senha antiga nao confere');
+                throw new AppError("Old password does not match")
             }
-
-            user.password = await hash(password, 8);
         }
 
+        user.password = await hash(password, 8);
 
-        await database.run(
-            `UPDATE users SET 
-            name = (?), 
-            email = (?),
-            password = (?),
-            updated_at = DATETIME('now', 'localtime'), 
-            id = ?`, 
-            [user.name, user.email, user.password, id]);
+        await database.run(`
+            UPDATE users SET
+            name = ?,
+            email = ?,
+            password = ?,
+            updated_at = DATETIME('now')
+            WHERE id = ?`,
+            [user.name, user.email, user.password, id]
+        );
 
-        return res.json();
+        return response.json();
     }
 }
 
