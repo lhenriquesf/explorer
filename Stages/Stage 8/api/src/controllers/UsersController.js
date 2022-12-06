@@ -11,7 +11,7 @@ class UsersController {
         const checkuserExists = await database.get("SELECT * FROM users WHERE email = (?)", [email]);
 
         if(checkuserExists){
-            throw new AppError("Email already exists");
+            throw new AppError('E-mail ja cadastrado');
         }
 
         const hashedPassword = await hash(password, 8);
@@ -32,31 +32,32 @@ class UsersController {
         const user = await database.get("SELECT * FROM users WHERE id = (?)", [id]);
 
         if(!user){
-            throw new AppError("User not found");
+            throw new AppError('Usuario nao encontrado!');
         }
 
         const userWithUpdatedEmail = await database.get("SELECT * FROM users WHERE email = (?)", [email]);
 
         if(userWithUpdatedEmail && userWithUpdatedEmail.id !== user.id){
-            throw new AppError("Email is already in use");
+            throw new AppError('E-mail ja esta em uso!');
         }
 
         user.name = name ?? user.name;
         user.email = email ?? user.email;
 
         if(password && !old_password) {
-            throw new AppError("You need to inform the old password to set the new password");
+            throw new AppError('Precisa informar a senha antiga');
         }
 
         if(password && old_password){
             const checkOldPassword = await compare(old_password, user.password);
 
             if(!checkOldPassword){
-                throw new AppError("Old password does not match")
+                throw new AppError('A senha antiga nao confere');
             }
-        }
 
-        user.password = await hash(password, 8);
+            user.password = await hash(password, 8);
+        }
+        
 
         await database.run(`
             UPDATE users SET
