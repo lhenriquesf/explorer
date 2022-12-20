@@ -13,8 +13,6 @@ export const Container = styled.div`
         "menu search"
         "menu content"
         "newnote content";
-
-    background-color: ${({theme}) => theme.COLORS.BACKGROUND_800};
 `;
 
 
